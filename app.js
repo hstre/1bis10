@@ -11,7 +11,9 @@ const state = {
   raf: null,
   autoAdvance: localStorage.getItem("autoAdvance") !== "false",
   sequenceShown: 1,
-  sequenceTimer: null
+  sequenceTimer: null,
+  visualHidden: false,
+  visualTimer: null
 };
 
 const esc = value => String(value).replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char]));
@@ -56,6 +58,7 @@ function taskVisual(type) {
 
 function renderHome() {
   state.screen = "home";
+  clearVisualFlash();
   stopClock();
   const buttons = sets.map((set, i) => `<button class="set-button ${i === state.setIndex ? "selected" : ""}" data-set="${i}">${String(set.id).padStart(2,"0")}</button>`).join("");
   app.innerHTML = `
@@ -91,7 +94,11 @@ function taskBody(task) {
     }
     return `<div class="chart" aria-label="Säulendiagramm">${task.values.map((v,i) => `<div class="bar-column">${task.showValues ? `<span>${v}</span>` : ""}<div class="bar" style="height:${Math.round(v/max*190)}px"></div><strong>${esc(task.labels[i])}</strong></div>`).join("")}</div>`;
   }
-  if (task.kind === "geometry" || task.kind === "solid") return taskVisual(task.visual);
+  if (task.kind === "geometry" || task.kind === "solid") {
+    return state.visualHidden
+      ? `<div class="diagram-placeholder" aria-hidden="true"></div>`
+      : taskVisual(task.visual);
+  }
   return "";
 }
 
@@ -100,9 +107,11 @@ function signed(value) { return value >= 0 ? `+ ${value}` : `− ${Math.abs(valu
 function renderTask(reset = true) {
   state.screen = "task";
   if (reset) {
+    clearVisualFlash();
     stopClock();
     state.elapsed = 0;
     state.sequenceShown = 1;
+    state.visualHidden = false;
   }
   const task = currentTask();
   app.innerHTML = `
@@ -123,6 +132,22 @@ function renderTask(reset = true) {
       </div>
     </section>`;
   updateProgress();
+  scheduleVisualFlash();
+}
+
+function clearVisualFlash() {
+  if (state.visualTimer) clearTimeout(state.visualTimer);
+  state.visualTimer = null;
+}
+
+function scheduleVisualFlash() {
+  const task = currentTask();
+  if ((task.kind !== "geometry" && task.kind !== "solid") || state.visualHidden || state.visualTimer) return;
+  state.visualTimer = setTimeout(() => {
+    state.visualTimer = null;
+    state.visualHidden = true;
+    document.querySelector(".task-diagram")?.classList.add("flash-hidden");
+  }, 2500);
 }
 
 function startClock() {
@@ -261,5 +286,5 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowLeft") previousTask();
 });
 
-if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=8"));
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=9"));
 renderHome();
