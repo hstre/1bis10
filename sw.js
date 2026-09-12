@@ -1,5 +1,5 @@
-const CACHE = "eins-bis-zehn-v7";
-const FILES = ["./", "./index.html", "./styles.css?v=7", "./sets.js?v=7", "./app.js?v=7", "./manifest.webmanifest"];
+const CACHE = "eins-bis-zehn-v8";
+const FILES = ["./", "./index.html", "./styles.css?v=8", "./sets.js?v=8", "./app.js?v=8", "./manifest.webmanifest"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)));
