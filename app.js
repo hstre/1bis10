@@ -74,8 +74,10 @@ function renderHome() {
 function taskBody(task) {
   if (task.kind === "equation") return `<div class="equation">${esc(task.display)}</div>`;
   if (task.kind === "sequence") {
-    const shown = task.values.slice(0, state.sequenceShown).map((v,i) => `<span class="number-chip ${v < 0 ? "negative" : "positive"}">${i === 0 ? esc(v) : esc(signed(v))}</span>`).join("");
-    return `<div class="sequence">${shown}</div>`;
+    const index = Math.min(state.sequenceShown - 1, task.values.length - 1);
+    const value = task.values[index];
+    const label = index === 0 ? value : signed(value);
+    return `<div class="sequence"><span class="number-chip ${value < 0 ? "negative" : "positive"}">${esc(label)}</span></div>`;
   }
   if (task.kind === "receipt") return `<div class="receipt">${task.detail.map(([a,b]) => `<div><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join("")}</div>`;
   if (task.kind === "choices") return `<div class="choices">${task.choices.map(c => `<div>${esc(c)}</div>`).join("")}</div>`;
@@ -176,7 +178,10 @@ function scheduleSequence() {
   state.sequenceTimer = setTimeout(() => {
     state.sequenceShown++;
     const box = document.querySelector(".sequence");
-    if (box) box.innerHTML = task.values.slice(0, state.sequenceShown).map((v,i) => `<span class="number-chip ${v < 0 ? "negative" : "positive"}">${i === 0 ? esc(v) : esc(signed(v))}</span>`).join("");
+    const index = state.sequenceShown - 1;
+    const value = task.values[index];
+    const label = index === 0 ? value : signed(value);
+    if (box) box.innerHTML = `<span class="number-chip ${value < 0 ? "negative" : "positive"}">${esc(label)}</span>`;
     scheduleSequence();
   }, interval);
 }
