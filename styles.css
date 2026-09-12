@@ -47,6 +47,18 @@ h1 { margin: 0; font-size: clamp(40px, 6vw, 68px); letter-spacing: -.04em; }
 .download-card strong { font-size: 18px; }
 .download-card small { color: var(--muted); font-size: 14px; }
 .download-card b { white-space: nowrap; font-size: 15px; }
+.trick-downloads { margin-top: 12px; border: 1px solid #ccd7e0; border-radius: 16px; background: white; overflow: hidden; }
+.trick-downloads summary { padding: 17px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--navy); cursor: pointer; list-style: none; }
+.trick-downloads summary::-webkit-details-marker { display: none; }
+.trick-downloads summary span { display: grid; gap: 3px; }
+.trick-downloads summary strong { font-size: 18px; }
+.trick-downloads summary small { color: var(--muted); font-size: 14px; }
+.trick-downloads summary b { white-space: nowrap; font-size: 15px; }
+.trick-downloads[open] summary { border-bottom: 1px solid #dce4ea; }
+.trick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; }
+.trick-grid a { display: flex; align-items: center; gap: 11px; min-height: 48px; padding: 8px 12px; border-radius: 12px; color: var(--navy); font-weight: 700; text-decoration: none; }
+.trick-grid a:hover { background: var(--sky); }
+.trick-grid a span { display: grid; place-items: center; flex: 0 0 34px; height: 34px; border-radius: 10px; background: var(--navy); color: white; font-size: 13px; }
 .toggle { display: flex; gap: 12px; align-items: center; margin-top: 24px; font-size: 17px; color: var(--muted); }
 .toggle input { width: 20px; height: 20px; accent-color: var(--blue); }
 .key-help { color: #8b98a4; margin: 16px 0 0; font-size: 14px; }
@@ -142,6 +154,8 @@ td small { color: var(--muted); }
   .set-button { min-height: 48px; border-radius: 12px; }
   .home-actions { flex-direction: column; }
   .download-card { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .trick-downloads summary { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .trick-grid { grid-template-columns: 1fr; }
   .topbar { padding: 0 12px; height: 62px; }
   .top-title { font-size: 20px; }
   .top-meta { font-size: 14px; }
