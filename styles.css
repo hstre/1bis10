@@ -85,7 +85,14 @@ h1 { margin: 0; font-size: clamp(40px, 6vw, 68px); letter-spacing: -.04em; }
 .line-chart text { text-anchor: middle; font-weight: 800; font-size: 18px; fill: var(--navy); }
 .mini-table { width: min(560px, 90%); margin: 0; font-size: 30px; text-align: center; }
 .mini-table th, .mini-table td { text-align: center; padding: 20px; }
-.geometry-symbol { font-size: clamp(110px, 18vw, 230px); line-height: 1; color: var(--blue); }
+.task-diagram { width: clamp(190px, 24vw, 330px); max-height: 280px; overflow: visible; }
+.task-diagram rect,
+.task-diagram polygon,
+.task-diagram circle,
+.task-diagram ellipse,
+.task-diagram path { fill: rgb(46 111 158 / .08); stroke: var(--blue); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.task-diagram .soft { fill: none; stroke-width: 4; stroke-dasharray: 8 9; opacity: .65; }
+.task-diagram .point { fill: var(--blue); stroke: none; }
 
 .controls { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 12px; }
 .ghost { background: transparent; color: var(--muted); font-size: 20px; }
