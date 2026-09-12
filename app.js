@@ -85,9 +85,9 @@ function taskBody(task) {
     if (task.chartMode === "table") return `<table class="mini-table"><thead><tr>${task.labels.map(label => `<th>${esc(label)}</th>`).join("")}</tr></thead><tbody><tr>${task.values.map(value => `<td>${value}</td>`).join("")}</tr></tbody></table>`;
     if (task.chartMode === "line") {
       const points = task.values.map((v,i) => `${50 + i*140},${220 - (v/max)*170}`).join(" ");
-      return `<div class="line-chart"><svg viewBox="0 0 380 250" role="img" aria-label="Liniendiagramm"><path d="M35 25 V220 H360"/><polyline points="${points}"/>${task.values.map((v,i) => `<circle cx="${50+i*140}" cy="${220-(v/max)*170}" r="7"/><text x="${50+i*140}" y="242">${esc(task.labels[i])}</text><text x="${50+i*140}" y="${205-(v/max)*170}">${v}</text>`).join("")}</svg></div>`;
+      return `<div class="line-chart"><svg viewBox="0 0 380 250" role="img" aria-label="Liniendiagramm"><path d="M35 25 V220 H360"/><polyline points="${points}"/>${task.values.map((v,i) => `<circle cx="${50+i*140}" cy="${220-(v/max)*170}" r="7"/><text x="${50+i*140}" y="242">${esc(task.labels[i])}</text>${task.showValues ? `<text x="${50+i*140}" y="${205-(v/max)*170}">${v}</text>` : ""}`).join("")}</svg></div>`;
     }
-    return `<div class="chart" aria-label="Säulendiagramm">${task.values.map((v,i) => `<div class="bar-column"><span>${v}</span><div class="bar" style="height:${Math.round(v/max*190)}px"></div><strong>${esc(task.labels[i])}</strong></div>`).join("")}</div>`;
+    return `<div class="chart" aria-label="Säulendiagramm">${task.values.map((v,i) => `<div class="bar-column">${task.showValues ? `<span>${v}</span>` : ""}<div class="bar" style="height:${Math.round(v/max*190)}px"></div><strong>${esc(task.labels[i])}</strong></div>`).join("")}</div>`;
   }
   if (task.kind === "geometry" || task.kind === "solid") return taskVisual(task.visual);
   return "";
