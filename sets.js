@@ -42,8 +42,8 @@ const multiplication = [
 ];
 
 const divisions = [
-  [48,6],[63,7],[96,8],[84,7],[90,5],[126,9],[144,12],[100,4],[120,8],[132,11],
-  [156,12],[108,6],[175,7],[160,8],[135,9],[216,12],[128,4],[200,5],[225,9],[168,8],
+  [48,6],[63,7],[96,8],[84,7],[120,8],[126,9],[144,12],[100,4],[108,6],[132,11],
+  [156,12],[135,9],[175,7],[160,8],[225,9],[216,12],[128,4],[200,5],[90,5],[168,8],
   [198,11],[240,12],[182,7],[256,8],[270,9],[300,6],[288,12],[224,7],[320,8],[330,11],
   [360,9],[350,7],[384,12],[400,8],[450,9],[420,12],[396,11],[480,12],[432,8],[525,7]
 ];
@@ -62,8 +62,8 @@ const units = [
 ];
 
 const estimates = [
-  ["Wie hoch ist ungefähr eine Zimmertür?", ["20 cm","2 m","20 m"], "2 m"],
   ["Wie schwer ist ungefähr ein Schulranzen?", ["400 g","4 kg","40 kg"], "4 kg"],
+  ["Wie hoch ist ungefähr eine Zimmertür?", ["20 cm","2 m","20 m"], "2 m"],
   ["Wie lang dauert ungefähr eine Unterrichtsstunde?", ["5 min","45 min","4 h"], "45 min"],
   ["Welches Ergebnis liegt 49 · 21 am nächsten?", ["100","1000","10 000"], "1000"],
   ["Wie viel Wasser passt ungefähr in eine Badewanne?", ["2 l","20 l","200 l"], "200 l"],
@@ -184,11 +184,11 @@ const planeTasks = [
 ];
 
 const solidTasks = [
-  ["Wie viele Ecken hat ein Würfel?","8"],["Wie viele Kanten hat ein Würfel?","12"],
+  ["Wie viele Kanten hat ein Würfel?","12"],["Wie viele Ecken hat ein Würfel?","8"],
   ["Wie viele Flächen hat ein Würfel?","6"],["Wie viele Ecken hat eine quadratische Pyramide?","5"],
-  ["Wie viele Kanten hat eine quadratische Pyramide?","8"],["Wie viele Flächen hat eine quadratische Pyramide?","5"],
-  ["Welcher Körper hat keine Ecken und keine Kanten?","Kugel"],["Wie viele Ecken hat ein Quader?","8"],
-  ["Wie viele Kanten hat ein Quader?","12"],["Wie viele Flächen hat ein Quader?","6"],
+  ["Wie viele Kanten hat eine quadratische Pyramide?","8"],["Welcher Körper hat keine Ecken und keine Kanten?","Kugel"],
+  ["Wie viele Flächen hat eine quadratische Pyramide?","5"],["Wie viele Kanten hat ein Quader?","12"],
+  ["Wie viele Ecken hat ein Quader?","8"],["Wie viele Flächen hat ein Quader?","6"],
   ["Wie heißt ein Körper mit zwei Kreisflächen und einer gekrümmten Fläche?","Zylinder"],
   ["Wie viele Ecken hat ein Zylinder?","0"],["Wie viele Kanten hat ein Zylinder?","2 Kreislinien"],
   ["Wie heißt ein Körper mit einer Kreisfläche und einer Spitze?","Kegel"],
@@ -199,8 +199,8 @@ const solidTasks = [
   ["Welcher Körper hat genau eine Spitze und eine Kreisfläche?","Kegel"],["Welcher Körper hat zwei gleich große Kreisflächen?","Zylinder"],
   ["Wie viele Würfel braucht man mindestens für einen Turm der Höhe 5?","5"],
   ["Wie viele sichtbare Flächen hat ein einzelner Würfel?","6"],
-  ["Zwei Würfel werden an einer Fläche zusammengeklebt. Wie viele Flächen bleiben außen sichtbar?","10"],
   ["Drei Würfel stehen in einer geraden Reihe. Wie viele Flächen sind außen sichtbar?","14"],
+  ["Zwei Würfel werden an einer Fläche zusammengeklebt. Wie viele Flächen bleiben außen sichtbar?","10"],
   ["Wie heißt die Ansicht eines Körpers direkt von oben?","Draufsicht"],
   ["Wie heißt die Ansicht eines Körpers direkt von vorn?","Vorderansicht"],
   ["Kann ein Würfelnetz aus fünf Quadraten bestehen?","nein, es braucht sechs"],
@@ -278,14 +278,14 @@ function ratioTask(i) {
 const chartSpecs = [
   [[2,4,5],"max"], [[6,9,6],"max"], [[4,7,3],"sum"], [[7,7,3],"max"],
   [[3,8,5],"min"], [[9,4,7],"difference"], [[4,2,4],"max"], [[8,3,6],"min"],
-  [[5,5,5],"sum"], [[2,7,4],"max"], [[6,6,2],"max"], [[3,9,5],"difference"],
+  [[4,5,7],"sum"], [[2,7,4],"max"], [[6,6,2],"max"], [[3,9,5],"difference"],
   [[7,4,7],"min"], [[5,8,8],"max"], [[4,6,9],"sum"], [[9,3,9],"max"],
   [[2,5,3],"min"], [[8,6,4],"difference"], [[5,2,2],"min"], [[3,7,5],"sum"],
   [[6,9,9],"max"], [[8,5,7],"min"], [[4,8,6],"difference"], [[7,3,7],"max"],
   [[2,6,4],"sum"], [[9,9,5],"max"], [[5,3,8],"min"], [[7,4,6],"difference"],
   [[3,5,5],"max"], [[8,2,6],"sum"], [[4,9,4],"max"], [[6,3,3],"min"],
   [[2,8,5],"difference"], [[7,7,4],"max"], [[5,9,6],"sum"], [[8,4,8],"max"],
-  [[3,6,2],"min"], [[9,5,7],"difference"], [[4,4,9],"min"], [[6,2,8],"sum"]
+  [[3,6,2],"min"], [[9,4,7],"difference"], [[4,4,9],"min"], [[6,2,8],"sum"]
 ];
 
 function chartTask(i) {
