@@ -296,14 +296,49 @@ function proportionalTask(i) {
   };
 }
 
+function planeVisual(prompt, answer) {
+  const text = `${prompt} ${answer}`.toLowerCase();
+  if (text.includes("zwölfeck")) return "dodecagon";
+  if (text.includes("zehneck")) return "decagon";
+  if (text.includes("achteck")) return "octagon";
+  if (text.includes("sechseck")) return "hexagon";
+  if (text.includes("fünfeck")) return "pentagon";
+  if (text.includes("quadrat")) return "square";
+  if (text.includes("rechteck")) return "rectangle";
+  if (text.includes("parallelogramm")) return "parallelogram";
+  if (text.includes("trapez")) return "trapezoid";
+  if (text.includes("raute")) return "rhombus";
+  if (text.includes("kreis")) return "circle";
+  if (text.includes("rechtwinklig") && text.includes("dreieck")) return "right-triangle";
+  if (text.includes("gleichseitig") && text.includes("dreieck")) return "equilateral-triangle";
+  if (text.includes("gleichschenklig") && text.includes("dreieck")) return "isosceles-triangle";
+  if (text.includes("dreieck")) return "triangle";
+  if (text.includes("strecke") || text.includes("gerade")) return "line";
+  return null;
+}
+
+function solidVisual(prompt, answer) {
+  const text = `${prompt} ${answer}`.toLowerCase();
+  if (text.includes("würfelnetz")) return "cube-net";
+  if (text.includes("quadratische pyramide")) return "square-pyramid";
+  if (text.includes("dreieckige pyramide")) return "tetrahedron";
+  if (text.includes("zylinder")) return "cylinder";
+  if (text.includes("kegel")) return "cone";
+  if (text.includes("kugel")) return "sphere";
+  if (text.includes("quader")) return "cuboid";
+  if (text.includes("würfel")) return "cube";
+  if (text.includes("ansicht")) return "cube";
+  return null;
+}
+
 function planeTask(i) {
   const [prompt,answer] = planeTasks[i];
-  return { prompt, answer, seconds: 30, kind: "geometry", symbol: ["△","□","◇","⬡"][i%4] };
+  return { prompt, answer, seconds: 30, kind: "geometry", visual: planeVisual(prompt, answer) };
 }
 
 function solidTask(i) {
   const [prompt,answer] = solidTasks[i];
-  return { prompt, answer, seconds: 30, kind: "solid", symbol: ["▦","◭","◉","⬡"][i%4] };
+  return { prompt, answer, seconds: 30, kind: "solid", visual: solidVisual(prompt, answer) };
 }
 
 window.KOPFRECHEN_SETS = Array.from({ length: 40 }, (_, i) => ({
