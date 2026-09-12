@@ -85,7 +85,10 @@ h1 { margin: 0; font-size: clamp(40px, 6vw, 68px); letter-spacing: -.04em; }
 .line-chart text { text-anchor: middle; font-weight: 800; font-size: 18px; fill: var(--navy); }
 .mini-table { width: min(560px, 90%); margin: 0; font-size: 30px; text-align: center; }
 .mini-table th, .mini-table td { text-align: center; padding: 20px; }
-.task-diagram { width: clamp(190px, 24vw, 330px); max-height: 280px; overflow: visible; }
+.task-diagram,
+.diagram-placeholder { width: clamp(190px, 24vw, 330px); max-height: 280px; aspect-ratio: 290 / 240; }
+.task-diagram { overflow: visible; transition: opacity .25s ease, transform .25s ease; }
+.task-diagram.flash-hidden { opacity: 0; transform: scale(.96); }
 .task-diagram rect,
 .task-diagram polygon,
 .task-diagram circle,
