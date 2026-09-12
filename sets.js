@@ -273,17 +273,41 @@ function ratioTask(i) {
   return { prompt, answer, seconds: 30, kind: "ratio", filled, total };
 }
 
+const chartSpecs = [
+  [[2,4,5],"max"], [[6,9,6],"max"], [[4,7,3],"sum"], [[7,7,3],"max"],
+  [[3,8,5],"min"], [[9,4,7],"difference"], [[4,2,4],"max"], [[8,3,6],"min"],
+  [[5,5,5],"sum"], [[2,7,4],"max"], [[6,6,2],"max"], [[3,9,5],"difference"],
+  [[7,4,7],"min"], [[5,8,8],"max"], [[4,6,9],"sum"], [[9,3,9],"max"],
+  [[2,5,3],"min"], [[8,6,4],"difference"], [[5,2,2],"min"], [[3,7,5],"sum"],
+  [[6,9,9],"max"], [[8,5,7],"min"], [[4,8,6],"difference"], [[7,3,7],"max"],
+  [[2,6,4],"sum"], [[9,9,5],"max"], [[5,3,8],"min"], [[7,4,6],"difference"],
+  [[3,5,5],"max"], [[8,2,6],"sum"], [[4,9,4],"max"], [[6,3,3],"min"],
+  [[2,8,5],"difference"], [[7,7,4],"max"], [[5,9,6],"sum"], [[8,4,8],"max"],
+  [[3,6,2],"min"], [[9,5,7],"difference"], [[4,4,9],"min"], [[6,2,8],"sum"]
+];
+
 function chartTask(i) {
-  const a = 2 + (i % 5), b = a + 2 + (i % 3), c = b + 1 + ((i * 2) % 4);
+  const [values, operation] = chartSpecs[i];
   const labels = ["Mo", "Di", "Mi"];
-  const questions = [
-    `An welchem Tag ist der Wert am größten?`,
-    `Um wie viel ist der Wert von ${labels[0]} bis ${labels[2]} gestiegen?`,
-    `Wie groß ist die Summe aller drei Werte?`
-  ];
-  const q = questions[i % 3];
-  const answer = i % 3 === 0 ? labels[2] : i % 3 === 1 ? String(c-a) : String(a+b+c);
-  return { prompt: q, answer, seconds: 35, kind: "chart", chartMode: ["bars", "line", "table"][i % 3], labels, values: [a,b,c] };
+  const chartMode = ["bars", "line", "table"][i % 3];
+  let prompt;
+  let answer;
+  if (operation === "max" || operation === "min") {
+    const target = operation === "max" ? Math.max(...values) : Math.min(...values);
+    const days = labels.filter((_, index) => values[index] === target);
+    prompt = `An ${days.length === 1 ? "welchem Tag" : "welchen Tagen"} ist der Wert am ${operation === "max" ? "größten" : "kleinsten"}?`;
+    answer = days.join(" und ");
+  } else if (operation === "sum") {
+    prompt = "Wie groß ist die Summe aller drei Werte?";
+    answer = String(values.reduce((total, value) => total + value, 0));
+  } else {
+    prompt = "Um wie viel unterscheiden sich der größte und der kleinste Wert?";
+    answer = String(Math.max(...values) - Math.min(...values));
+  }
+  return {
+    prompt, answer, seconds: 35, kind: "chart", chartMode, labels, values,
+    showValues: chartMode === "table" || operation === "sum" || operation === "difference"
+  };
 }
 
 function proportionalTask(i) {
