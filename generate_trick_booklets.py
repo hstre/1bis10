@@ -433,7 +433,9 @@ def strategy_page(c, number, book, index, strategy):
         y = text_block(c, step, 22 * mm, y + 2.5 * mm, w - 35 * mm, 8.8, 11, max_lines=2) - 3 * mm
 
     example_h = 35 * mm
-    example_y = max(64 * mm, y - example_h + 4 * mm)
+    # Der Beispielkasten beginnt mit festem Abstand unter der letzten
+    # nummerierten Zeile. So kann er keinen Nummerierungskreis überdecken.
+    example_y = max(64 * mm, y - example_h - 3 * mm)
     c.setFillColor(PALE)
     c.setStrokeColor(GRID)
     c.roundRect(12 * mm, example_y, w - 24 * mm, example_h, 3 * mm, fill=1, stroke=1)
