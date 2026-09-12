@@ -313,6 +313,7 @@ function planeVisual(prompt, answer) {
   if (text.includes("gleichseitig") && text.includes("dreieck")) return "equilateral-triangle";
   if (text.includes("gleichschenklig") && text.includes("dreieck")) return "isosceles-triangle";
   if (text.includes("dreieck")) return "triangle";
+  if (text.includes("viereck")) return "quadrilateral";
   if (text.includes("strecke") || text.includes("gerade")) return "line";
   return null;
 }
@@ -320,8 +321,8 @@ function planeVisual(prompt, answer) {
 function solidVisual(prompt, answer) {
   const text = `${prompt} ${answer}`.toLowerCase();
   if (text.includes("würfelnetz")) return "cube-net";
-  if (text.includes("quadratische pyramide")) return "square-pyramid";
-  if (text.includes("dreieckige pyramide")) return "tetrahedron";
+  if (text.includes("quadratisch") && text.includes("pyramide")) return "square-pyramid";
+  if (text.includes("dreieckig") && text.includes("pyramide")) return "tetrahedron";
   if (text.includes("zylinder")) return "cylinder";
   if (text.includes("kegel")) return "cone";
   if (text.includes("kugel")) return "sphere";
