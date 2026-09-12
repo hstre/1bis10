@@ -69,6 +69,10 @@ function renderHome() {
         <button class="primary" data-action="start">${esc(currentSet().title)} starten</button>
         <button class="secondary" data-action="review">Kontrollansicht</button>
       </div>
+      <a class="download-card" href="output/pdf/1bis10-uebungsheft-klasse5.pdf" download>
+        <span><strong>Übungsheft als PDF</strong><small>400 Übungsseiten · 4.000 Aufgaben · mit Lösungen</small></span>
+        <b>Herunterladen ↓</b>
+      </a>
       <label class="toggle"><input type="checkbox" id="autoAdvance" ${state.autoAdvance ? "checked" : ""}><span>Nach Ablauf der Zeit automatisch weiter</span></label>
       <p class="key-help">Leertaste: Pause · Pfeiltasten: weiter/zurück · F: Vollbild</p>
     </section>`;
@@ -286,5 +290,5 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowLeft") previousTask();
 });
 
-if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=10"));
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=11"));
 renderHome();

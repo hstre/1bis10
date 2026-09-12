@@ -42,6 +42,11 @@ h1 { margin: 0; font-size: clamp(40px, 6vw, 68px); letter-spacing: -.04em; }
 .primary, .secondary, .pause, .ghost { border-radius: 14px; border: 0; min-height: 52px; padding: 0 24px; font-weight: 750; }
 .primary { background: var(--navy); color: white; }
 .secondary { background: white; color: var(--navy); border: 1px solid #ccd7e0; }
+.download-card { margin-top: 14px; padding: 17px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid #bdd2e0; border-radius: 16px; background: var(--sky); color: var(--navy); text-decoration: none; }
+.download-card span { display: grid; gap: 3px; }
+.download-card strong { font-size: 18px; }
+.download-card small { color: var(--muted); font-size: 14px; }
+.download-card b { white-space: nowrap; font-size: 15px; }
 .toggle { display: flex; gap: 12px; align-items: center; margin-top: 24px; font-size: 17px; color: var(--muted); }
 .toggle input { width: 20px; height: 20px; accent-color: var(--blue); }
 .key-help { color: #8b98a4; margin: 16px 0 0; font-size: 14px; }
@@ -136,6 +141,7 @@ td small { color: var(--muted); }
   .set-picker { grid-template-columns: repeat(5, 1fr); gap: 7px; }
   .set-button { min-height: 48px; border-radius: 12px; }
   .home-actions { flex-direction: column; }
+  .download-card { align-items: flex-start; flex-direction: column; gap: 10px; }
   .topbar { padding: 0 12px; height: 62px; }
   .top-title { font-size: 20px; }
   .top-meta { font-size: 14px; }
