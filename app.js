@@ -26,6 +26,7 @@ function taskVisual(type) {
   const shapes = {
     square: `<rect x="70" y="35" width="150" height="150"/>`,
     rectangle: `<rect x="45" y="60" width="200" height="120"/>`,
+    quadrilateral: `<polygon points="55,45 245,65 215,200 75,180"/>`,
     triangle: `<polygon points="145,30 245,190 45,190"/>`,
     "equilateral-triangle": `<polygon points="145,25 245,195 45,195"/>`,
     "isosceles-triangle": `<polygon points="145,25 235,195 55,195"/>`,
