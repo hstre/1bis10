@@ -1,4 +1,4 @@
-const CACHE = "eins-bis-zehn-v2";
+const CACHE = "eins-bis-zehn-v3";
 const FILES = ["./", "./index.html", "./styles.css", "./sets.js", "./app.js", "./manifest.webmanifest"];
 
 self.addEventListener("install", event => {
