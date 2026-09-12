@@ -22,6 +22,37 @@ function header(title, meta = "") {
   return `<header class="topbar"><button class="ghost home-button" data-action="home" aria-label="Zur Startseite">1 bis 10</button><div class="top-title">${esc(title)}</div><div class="top-meta">${esc(meta)}</div></header>`;
 }
 
+function taskVisual(type) {
+  const shapes = {
+    square: `<rect x="70" y="35" width="150" height="150"/>`,
+    rectangle: `<rect x="45" y="60" width="200" height="120"/>`,
+    triangle: `<polygon points="145,30 245,190 45,190"/>`,
+    "equilateral-triangle": `<polygon points="145,25 245,195 45,195"/>`,
+    "isosceles-triangle": `<polygon points="145,25 235,195 55,195"/>`,
+    "right-triangle": `<polygon points="55,35 55,195 245,195"/><path d="M55 170 H80 V195"/>`,
+    pentagon: `<polygon points="145,22 245,95 205,205 85,205 45,95"/>`,
+    hexagon: `<polygon points="80,30 210,30 270,115 210,200 80,200 20,115"/>`,
+    octagon: `<polygon points="90,25 200,25 265,90 265,155 200,220 90,220 25,155 25,90"/>`,
+    decagon: `<polygon points="145,18 215,40 258,98 258,160 215,210 145,226 75,210 32,160 32,98 75,40"/>`,
+    dodecagon: `<polygon points="100,20 190,20 235,45 270,90 270,155 235,200 190,225 100,225 55,200 20,155 20,90 55,45"/>`,
+    trapezoid: `<polygon points="85,45 205,45 260,195 30,195"/>`,
+    parallelogram: `<polygon points="85,45 250,45 205,195 40,195"/>`,
+    rhombus: `<polygon points="145,20 250,120 145,220 40,120"/>`,
+    circle: `<circle cx="145" cy="120" r="95"/><circle class="point" cx="145" cy="120" r="5"/>`,
+    line: `<path d="M35 185 L255 45"/><circle class="point" cx="70" cy="163" r="6"/><circle class="point" cx="220" cy="67" r="6"/>`,
+    cube: `<rect x="45" y="75" width="130" height="130"/><rect x="105" y="30" width="130" height="130"/><path d="M45 75 L105 30 M175 75 L235 30 M175 205 L235 160 M45 205 L105 160"/>`,
+    cuboid: `<rect x="35" y="90" width="165" height="105"/><rect x="90" y="45" width="165" height="105"/><path d="M35 90 L90 45 M200 90 L255 45 M200 195 L255 150 M35 195 L90 150"/>`,
+    "square-pyramid": `<polygon points="45,165 145,210 245,165 145,125"/><path d="M145 25 L45 165 M145 25 L145 210 M145 25 L245 165 M145 25 L145 125"/>`,
+    tetrahedron: `<polygon points="145,25 45,205 245,205"/><path d="M145 25 L145 145 M45 205 L145 145 L245 205"/>`,
+    sphere: `<circle cx="145" cy="120" r="95"/><ellipse cx="145" cy="120" rx="95" ry="34"/><path class="soft" d="M145 25 C95 70 95 170 145 215 M145 25 C195 70 195 170 145 215"/>`,
+    cylinder: `<ellipse cx="145" cy="45" rx="90" ry="28"/><path d="M55 45 V195 M235 45 V195"/><ellipse cx="145" cy="195" rx="90" ry="28"/><path class="soft" d="M55 195 C70 225 220 225 235 195"/>`,
+    cone: `<ellipse cx="145" cy="195" rx="95" ry="28"/><path d="M145 25 L50 195 M145 25 L240 195"/><path class="soft" d="M50 195 C70 225 220 225 240 195"/>`,
+    "cube-net": `<g transform="translate(25 10)"><rect x="80" y="0" width="55" height="55"/><rect x="0" y="55" width="55" height="55"/><rect x="55" y="55" width="55" height="55"/><rect x="110" y="55" width="55" height="55"/><rect x="165" y="55" width="55" height="55"/><rect x="80" y="110" width="55" height="55"/></g>`
+  };
+  if (!type || !shapes[type]) return "";
+  return `<svg class="task-diagram" viewBox="0 0 290 240" role="img" aria-label="Passende geometrische Darstellung">${shapes[type]}</svg>`;
+}
+
 function renderHome() {
   state.screen = "home";
   stopClock();
@@ -57,7 +88,7 @@ function taskBody(task) {
     }
     return `<div class="chart" aria-label="Säulendiagramm">${task.values.map((v,i) => `<div class="bar-column"><span>${v}</span><div class="bar" style="height:${Math.round(v/max*190)}px"></div><strong>${esc(task.labels[i])}</strong></div>`).join("")}</div>`;
   }
-  if (task.kind === "geometry" || task.kind === "solid") return `<div class="geometry-symbol" aria-hidden="true">${esc(task.symbol)}</div>`;
+  if (task.kind === "geometry" || task.kind === "solid") return taskVisual(task.visual);
   return "";
 }
 
