@@ -1,0 +1,10 @@
+{
+  "name": "1 bis 10 · Kopfrechnen",
+  "short_name": "1 bis 10",
+  "description": "40 feste Kopfrechen-Durchgänge für Klasse 5",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fa",
+  "theme_color": "#17324d",
+  "icons": []
+}
