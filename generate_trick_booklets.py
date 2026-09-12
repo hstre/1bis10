@@ -344,6 +344,18 @@ def text_block(c, text, x, y, width, size=10, leading=13, font="DV", color=INK, 
     return y - len(lines) * leading
 
 
+def number_circle(c, x, y, radius, label, font_size):
+    """Zeichnet eine Ziffer optisch exakt mittig in einen Kreis."""
+    c.setFillColor(BLUE)
+    c.circle(x, y, radius, fill=1, stroke=0)
+    c.setFillColor(white)
+    c.setFont("DV-Bold", font_size)
+    ascent = pdfmetrics.getAscent("DV-Bold", font_size)
+    descent = pdfmetrics.getDescent("DV-Bold", font_size)
+    baseline = y - (ascent + descent) / 2
+    c.drawCentredString(x, baseline, str(label))
+
+
 def page_footer(c, page, total=8):
     w, _ = A5
     c.setStrokeColor(GRID)
@@ -361,11 +373,7 @@ def cover(c, number, book):
     c.setFillColor(white)
     c.setFont("DV-Bold", 9)
     c.drawString(14 * mm, h - 17 * mm, "1 BIS 10 · RECHENTRICKS")
-    c.setFillColor(BLUE)
-    c.circle(w - 25 * mm, h - 28 * mm, 12 * mm, fill=1, stroke=0)
-    c.setFillColor(white)
-    c.setFont("DV-Bold", 24)
-    c.drawCentredString(w - 25 * mm, h - 31 * mm, str(number))
+    number_circle(c, w - 25 * mm, h - 28 * mm, 12 * mm, number, 24)
     y = h - 54 * mm
     for line in wrap(book["title"], "DV-Bold", 23, w - 28 * mm):
         c.setFont("DV-Bold", 23)
@@ -378,14 +386,10 @@ def cover(c, number, book):
     c.drawString(14 * mm, h * .40, "In diesem Heft")
     y = h * .35
     for i, strategy in enumerate(book["strategies"], 1):
-        c.setFillColor(BLUE)
-        c.circle(18 * mm, y + 1.2 * mm, 3.2 * mm, fill=1, stroke=0)
-        c.setFillColor(white)
-        c.setFont("DV-Bold", 7)
-        c.drawCentredString(18 * mm, y - 1.2 * mm, str(i))
+        number_circle(c, 18 * mm, y + 0.9 * mm, 3.2 * mm, i, 7)
         c.setFillColor(INK)
         c.setFont("DV-Bold", 9.3)
-        c.drawString(25 * mm, y - 1.5 * mm, strategy["title"])
+        c.drawString(25 * mm, y, strategy["title"])
         y -= 8.5 * mm
     c.setFillColor(SKY)
     c.roundRect(14 * mm, 18 * mm, w - 28 * mm, 18 * mm, 3 * mm, fill=1, stroke=0)
@@ -405,11 +409,7 @@ def strategy_page(c, number, book, index, strategy):
     c.drawString(12 * mm, h - 9 * mm, f"RECHENTRICK {index} VON 5")
     c.setFont("DV-Bold", 15)
     c.drawString(12 * mm, h - 17 * mm, strategy["title"])
-    c.setFillColor(BLUE)
-    c.circle(w - 18 * mm, h - 11.5 * mm, 7 * mm, fill=1, stroke=0)
-    c.setFillColor(white)
-    c.setFont("DV-Bold", 14)
-    c.drawCentredString(w - 18 * mm, h - 14 * mm, str(number))
+    number_circle(c, w - 18 * mm, h - 11.5 * mm, 7 * mm, number, 14)
 
     y = h - 34 * mm
     c.setFillColor(SKY)
@@ -425,12 +425,11 @@ def strategy_page(c, number, book, index, strategy):
     c.drawString(12 * mm, y, "So geht's")
     y -= 8 * mm
     for step_no, step in enumerate(strategy["steps"], 1):
-        c.setFillColor(BLUE)
-        c.circle(16 * mm, y + 1 * mm, 2.7 * mm, fill=1, stroke=0)
-        c.setFillColor(white)
-        c.setFont("DV-Bold", 6.5)
-        c.drawCentredString(16 * mm, y - 1.1 * mm, str(step_no))
-        y = text_block(c, step, 22 * mm, y + 2.5 * mm, w - 35 * mm, 8.8, 11, max_lines=2) - 3 * mm
+        step_lines = wrap(step, "DV", 8.8, w - 35 * mm)[:2]
+        number_circle(c, 16 * mm, y + 0.9 * mm, 2.5 * mm, step_no, 6.2)
+        text_block(c, step, 22 * mm, y, w - 35 * mm, 8.8, 11, max_lines=2)
+        row_height = max(8 * mm, len(step_lines) * 11 + 3 * mm)
+        y -= row_height
 
     example_h = 35 * mm
     # Der Beispielkasten beginnt mit festem Abstand unter der letzten
@@ -479,12 +478,8 @@ def practice_page(c, number, book):
     row_h = 14.7 * mm
     for i, (question, _) in enumerate(book["practice"], 1):
         y = top - (i - 1) * row_h
-        c.setFillColor(NAVY)
-        c.circle(16 * mm, y, 3.2 * mm, fill=1, stroke=0)
-        c.setFillColor(white)
-        c.setFont("DV-Bold", 7)
-        c.drawCentredString(16 * mm, y - 2.2, str(i))
-        text_block(c, question, 23 * mm, y + 2.5 * mm, w - 36 * mm, 8.3, 9.5, max_lines=2)
+        number_circle(c, 16 * mm, y + 0.9 * mm, 3.2 * mm, i, 7)
+        text_block(c, question, 23 * mm, y, w - 36 * mm, 8.3, 9.5, max_lines=2)
         c.setStrokeColor(GRID)
         c.setDash(1.5, 2)
         c.line(23 * mm, y - 7 * mm, w - 13 * mm, y - 7 * mm)

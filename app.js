@@ -79,16 +79,16 @@ function renderHome() {
           <b>Auswählen ↓</b>
         </summary>
         <div class="trick-grid">
-          <a href="output/pdf/rechentricks/01-addition-subtraktion.pdf" download><span>01</span>Addition und Subtraktion</a>
-          <a href="output/pdf/rechentricks/02-multiplikation.pdf" download><span>02</span>Multiplikation</a>
-          <a href="output/pdf/rechentricks/03-division.pdf" download><span>03</span>Division</a>
-          <a href="output/pdf/rechentricks/04-einheiten.pdf" download><span>04</span>Einheiten</a>
-          <a href="output/pdf/rechentricks/05-schaetzen.pdf" download><span>05</span>Schätzen</a>
-          <a href="output/pdf/rechentricks/06-verhaeltnisse.pdf" download><span>06</span>Verhältnisse</a>
-          <a href="output/pdf/rechentricks/07-diagramme.pdf" download><span>07</span>Diagramme</a>
-          <a href="output/pdf/rechentricks/08-zwei-dreisatz.pdf" download><span>08</span>Zwei- und Dreisatz</a>
-          <a href="output/pdf/rechentricks/09-ebene-figuren.pdf" download><span>09</span>Ebene Figuren</a>
-          <a href="output/pdf/rechentricks/10-koerper-raum.pdf" download><span>10</span>Körper und Raum</a>
+          <a href="output/pdf/rechentricks/01-addition-subtraktion.pdf?v=3" download><span>01</span>Addition und Subtraktion</a>
+          <a href="output/pdf/rechentricks/02-multiplikation.pdf?v=3" download><span>02</span>Multiplikation</a>
+          <a href="output/pdf/rechentricks/03-division.pdf?v=3" download><span>03</span>Division</a>
+          <a href="output/pdf/rechentricks/04-einheiten.pdf?v=3" download><span>04</span>Einheiten</a>
+          <a href="output/pdf/rechentricks/05-schaetzen.pdf?v=3" download><span>05</span>Schätzen</a>
+          <a href="output/pdf/rechentricks/06-verhaeltnisse.pdf?v=3" download><span>06</span>Verhältnisse</a>
+          <a href="output/pdf/rechentricks/07-diagramme.pdf?v=3" download><span>07</span>Diagramme</a>
+          <a href="output/pdf/rechentricks/08-zwei-dreisatz.pdf?v=3" download><span>08</span>Zwei- und Dreisatz</a>
+          <a href="output/pdf/rechentricks/09-ebene-figuren.pdf?v=3" download><span>09</span>Ebene Figuren</a>
+          <a href="output/pdf/rechentricks/10-koerper-raum.pdf?v=3" download><span>10</span>Körper und Raum</a>
         </div>
       </details>
       <label class="toggle"><input type="checkbox" id="autoAdvance" ${state.autoAdvance ? "checked" : ""}><span>Nach Ablauf der Zeit automatisch weiter</span></label>
@@ -308,5 +308,5 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowLeft") previousTask();
 });
 
-if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=12"));
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=13"));
 renderHome();
