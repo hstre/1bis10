@@ -132,11 +132,11 @@ const proportionals = [
   [3,12,7,"Kilometer","min"],[4,12,6,"Äpfel","€"],[2,8,5,"Kinokarten","€"],[6,18,4,"Brötchen","€"],
   [5,15,8,"Stifte","€"],[3,9,10,"Liter Saft","€"],[4,20,7,"Tage","Seiten"],[2,10,6,"Pakete","kg"],
   [5,20,9,"Muffins","€"],[3,15,8,"Meter Stoff","€"],[4,16,9,"Fahrten","km"],[2,12,7,"Kisten","Flaschen"],
-  [6,24,5,"Bücher","€"],[4,28,9,"Stunden","€"],[3,18,7,"Portionen","Kartoffeln"],[5,25,12,"Tickets","€"],
-  [2,14,9,"Bro­te","€"],[4,24,7,"Becher","€"],[3,21,8,"Kilogramm Äpfel","€"],[5,30,9,"Runden","Punkte"],
+  [6,24,5,"Bücher","€"],[4,28,9,"Stunden Nachhilfe","€"],[3,18,7,"Portionen","Kartoffeln"],[5,25,12,"Tickets","€"],
+  [2,14,9,"Brote","€"],[4,24,7,"Becher","€"],[3,21,8,"Kilogramm Äpfel","€"],[5,30,9,"Runden","Punkte"],
   [6,30,11,"Bananen","€"],[4,32,7,"Kartons","Flaschen"],[3,24,10,"Meter Band","€"],[2,18,5,"Hefte","€"],
   [5,35,8,"Stunden","km"],[4,36,7,"Portionen","€"],[3,27,11,"Pakete","kg"],[6,42,5,"Flaschen","€"],
-  [4,40,9,"Minuten","Seiten"],[5,45,8,"Karten","€"],[3,30,7,"Kilogramm","€"],[2,22,6,"Fahrten","km"],
+  [4,40,9,"Minuten","Seiten"],[5,45,8,"Eintrittskarten","€"],[3,30,7,"Kilogramm Käse","€"],[2,22,6,"Fahrten","km"],
   [5,50,7,"Tage","Seiten"],[4,44,9,"Tüten","Bonbons"],[3,33,8,"Stifte","€"],[6,60,7,"Kisten","Flaschen"]
 ];
 
@@ -315,8 +315,35 @@ function chartTask(i) {
 function proportionalTask(i) {
   const [from,amount,to,noun,unit] = proportionals[i];
   const one = amount / from;
+  let prompt;
+
+  if (unit === "€") {
+    prompt = `${from} ${noun} kosten ${amount} €. Wie viel kosten ${to} ${noun}?`;
+  } else if (unit === "Flaschen") {
+    prompt = `${from} ${noun} enthalten zusammen ${amount} Flaschen. Wie viele Flaschen sind in ${to} ${noun}?`;
+  } else if (unit === "kg") {
+    prompt = `${from} ${noun} wiegen zusammen ${amount} kg. Wie viel wiegen ${to} ${noun}?`;
+  } else if (unit === "Eier" || unit === "Kartoffeln") {
+    prompt = `Für ${from} ${noun} braucht man ${amount} ${unit}. Wie viele ${unit} braucht man für ${to} ${noun}?`;
+  } else if (unit === "Punkte") {
+    prompt = `In ${from} ${noun} erreicht man ${amount} Punkte. Wie viele Punkte sind es in ${to} ${noun}?`;
+  } else if (unit === "Seiten") {
+    const period = noun === "Tage" ? "Tagen" : noun;
+    prompt = `In ${from} ${period} liest man ${amount} Seiten. Wie viele Seiten liest man in ${to} ${period}?`;
+  } else if (unit === "km" && noun === "Stunden") {
+    prompt = `In ${from} Stunden fährt man ${amount} km. Wie weit fährt man in ${to} Stunden?`;
+  } else if (unit === "km") {
+    prompt = `Bei ${from} ${noun} legt man insgesamt ${amount} km zurück. Wie viele Kilometer sind es bei ${to} ${noun}?`;
+  } else if (unit === "min") {
+    prompt = `Für ${from} ${noun} braucht man ${amount} Minuten. Wie viele Minuten braucht man für ${to} ${noun}?`;
+  } else if (unit === "Bonbons") {
+    prompt = `${from} ${noun} enthalten zusammen ${amount} Bonbons. Wie viele Bonbons sind in ${to} ${noun}?`;
+  } else {
+    prompt = `Bei ${from} ${noun} sind es ${amount} ${unit}. Wie viel ist es bei ${to} ${noun}?`;
+  }
+
   return {
-    prompt: `${from} ${noun} entsprechen ${amount} ${unit}. Wie viel entsprechen ${to} ${noun}?`,
+    prompt,
     answer: `${one * to} ${unit}`, detail: `${amount} : ${from} = ${one}; ${one} · ${to} = ${one*to}`,
     seconds: 30, kind: "story"
   };
