@@ -228,20 +228,20 @@ function additionTask(i) {
     const paid = Math.ceil(sum(positives) / 10) * 10 + 20;
     return {
       prompt: `Diese Rechnung wird mit ${paid} € bezahlt. Wie viel Rückgeld gibt es?`,
-      answer: `${paid - sum(positives)} €`, seconds: 35, kind: "receipt",
+      answer: `${paid - sum(positives)} €`, seconds: 25, kind: "receipt",
       detail: positives.map((v,j) => [`Posten ${j+1}`, `${v} €`])
     };
   }
   if (mode === "score") return {
     prompt: `Ein Team startet mit ${values[0]} Punkten. Danach: ${values.slice(1).map(signed).join(", ")}. Wie ist der Endstand?`,
-    answer: `${total} Punkte`, seconds: 30, kind: "score", values
+    answer: `${total} Punkte`, seconds: 22, kind: "score", values
   };
   if (mode === "stock") return {
     prompt: `Im Lager sind ${values[0]} Kisten. Danach werden ${values.slice(1).map(v => `${Math.abs(v)} ${v > 0 ? "geliefert" : "abgeholt"}`).join(", dann ")}. Wie viele sind es jetzt?`,
-    answer: `${total} Kisten`, seconds: 35, kind: "story"
+    answer: `${total} Kisten`, seconds: 25, kind: "story"
   };
   return {
-    prompt: "Rechne die Zahlen der Reihe nach.", answer: String(total), seconds: 30,
+    prompt: "Rechne die Zahlen der Reihe nach.", answer: String(total), seconds: 20,
     kind: "sequence", values
   };
 }
@@ -249,28 +249,30 @@ function additionTask(i) {
 function multiplicationTask(i) {
   const [a,b,mode] = multiplication[i];
   return mode === "missing"
-    ? { prompt: `Welche Zahl fehlt?`, display: `${a} · □ = ${a*b}`, answer: String(b), seconds: 25, kind: "equation" }
-    : { prompt: "Berechne im Kopf.", display: `${a} · ${b} =`, answer: String(a*b), seconds: 20, kind: "equation" };
+    ? { prompt: `Welche Zahl fehlt?`, display: `${a} · □ = ${a*b}`, answer: String(b), seconds: 15, kind: "equation" }
+    : { prompt: "Berechne im Kopf.", display: `${a} · ${b} =`, answer: String(a*b), seconds: 12, kind: "equation" };
 }
 
 function divisionTask(i) {
   const [a,b] = divisions[i];
-  return { prompt: "Berechne im Kopf.", display: `${a} : ${b} =`, answer: String(a/b), seconds: 20, kind: "equation" };
+  return { prompt: "Berechne im Kopf.", display: `${a} : ${b} =`, answer: String(a/b), seconds: 12, kind: "equation" };
 }
 
 function unitTask(i) {
   const [from,to,answer] = units[i];
-  return { prompt: "Rechne in die angegebene Einheit um.", display: `${from} = ____ ${to}`, answer, seconds: i > 14 ? 30 : 25, kind: "equation" };
+  const hasTwoParts = (from.match(/\d+(?:,\d+)?/g) || []).length > 1;
+  const seconds = hasTwoParts ? 24 : from.includes(",") ? 22 : 18;
+  return { prompt: "Rechne in die angegebene Einheit um.", display: `${from} = ____ ${to}`, answer, seconds, kind: "equation" };
 }
 
 function estimateTask(i) {
   const [prompt, choices, answer] = estimates[i];
-  return { prompt, choices, answer, seconds: 25, kind: "choices" };
+  return { prompt, choices, answer, seconds: 18, kind: "choices" };
 }
 
 function ratioTask(i) {
   const [filled,total,prompt,answer] = ratios[i];
-  return { prompt, answer, seconds: 30, kind: "ratio", filled, total };
+  return { prompt, answer, seconds: prompt.startsWith("Kürze") ? 18 : 15, kind: "ratio", filled, total };
 }
 
 const chartSpecs = [
@@ -305,7 +307,7 @@ function chartTask(i) {
     answer = String(Math.max(...values) - Math.min(...values));
   }
   return {
-    prompt, answer, seconds: 35, kind: "chart", chartMode, labels, values,
+    prompt, answer, seconds: operation === "sum" || operation === "difference" ? 24 : 18, kind: "chart", chartMode, labels, values,
     showValues: chartMode === "table" || operation === "sum" || operation === "difference"
   };
 }
@@ -316,7 +318,7 @@ function proportionalTask(i) {
   return {
     prompt: `${from} ${noun} entsprechen ${amount} ${unit}. Wie viel entsprechen ${to} ${noun}?`,
     answer: `${one * to} ${unit}`, detail: `${amount} : ${from} = ${one}; ${one} · ${to} = ${one*to}`,
-    seconds: 40, kind: "story"
+    seconds: 30, kind: "story"
   };
 }
 
@@ -358,12 +360,13 @@ function solidVisual(prompt, answer) {
 
 function planeTask(i) {
   const [prompt,answer] = planeTasks[i];
-  return { prompt, answer, seconds: 30, kind: "geometry", visual: planeVisual(prompt, answer) };
+  return { prompt, answer, seconds: prompt.length > 65 ? 20 : 17, kind: "geometry", visual: planeVisual(prompt, answer) };
 }
 
 function solidTask(i) {
   const [prompt,answer] = solidTasks[i];
-  return { prompt, answer, seconds: 30, kind: "solid", visual: solidVisual(prompt, answer) };
+  const needsCounting = /zusammen|zusammengeklebt|geraden Reihe|außen sichtbar|mindestens/.test(prompt);
+  return { prompt, answer, seconds: needsCounting ? 22 : 17, kind: "solid", visual: solidVisual(prompt, answer) };
 }
 
 window.KOPFRECHEN_SETS = Array.from({ length: 40 }, (_, i) => ({
