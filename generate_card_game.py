@@ -171,6 +171,99 @@ def centered_baseline(font, size, center_y):
     return center_y - (ascent + descent) / 2
 
 
+def draw_instruction_text(c, text, x, y, width, size=8.2, leading=10.5, max_lines=5):
+    c.setFillColor(INK)
+    c.setFont("DV", size)
+    lines = wrap(text, "DV", size, width)[:max_lines]
+    for line in lines:
+        c.drawString(x, y, line)
+        y -= leading
+
+
+def draw_instruction_step(c, x, y, width, height, number, title, text):
+    c.setFillColor(PALE)
+    c.setStrokeColor(GRID)
+    c.setLineWidth(0.7)
+    c.roundRect(x, y, width, height, 3 * mm, fill=1, stroke=1)
+
+    circle_x = x + 8 * mm
+    circle_y = y + height - 9 * mm
+    c.setFillColor(BLUE)
+    c.circle(circle_x, circle_y, 4.5 * mm, fill=1, stroke=0)
+    c.setFillColor(white)
+    c.setFont("DV-Bold", 10)
+    c.drawCentredString(circle_x, centered_baseline("DV-Bold", 10, circle_y), str(number))
+
+    c.setFillColor(NAVY)
+    c.setFont("DV-Bold", 10)
+    c.drawString(x + 16 * mm, y + height - 11 * mm, title)
+    draw_instruction_text(c, text, x + 7 * mm, y + height - 21 * mm, width - 14 * mm)
+
+
+def draw_instructions(c):
+    page_w, page_h = A4
+    c.setFillColor(NAVY)
+    c.rect(0, page_h - 54 * mm, page_w, 54 * mm, fill=1, stroke=0)
+    c.setFillColor(white)
+    c.setFont("DV-Bold", 9)
+    c.drawString(16 * mm, page_h - 13 * mm, "1 BIS 10 · KOPFRECHEN-DUELL")
+    c.setFont("DV-Bold", 24)
+    c.drawString(16 * mm, page_h - 29 * mm, "Spielanleitung")
+    c.setFont("DV", 11)
+    c.drawString(16 * mm, page_h - 41 * mm, "Für zwei tolle Rechnerinnen und Rechner")
+
+    material_y = page_h - 76 * mm
+    c.setFillColor(SKY)
+    c.roundRect(16 * mm, material_y, page_w - 32 * mm, 14 * mm, 3 * mm, fill=1, stroke=0)
+    c.setFillColor(NAVY)
+    c.setFont("DV-Bold", 9.5)
+    c.drawString(22 * mm, material_y + 8.5 * mm, "Das braucht ihr:")
+    c.setFont("DV", 9.5)
+    c.drawString(58 * mm, material_y + 8.5 * mm, "2 Spieler · ausgeschnittene Karten · 1 Sanduhr")
+
+    c.setFillColor(NAVY)
+    c.setFont("DV-Bold", 14)
+    c.drawString(16 * mm, page_h - 88 * mm, "So spielt ihr")
+
+    steps = [
+        ("Vorbereiten", "Schneidet die Karten aus. Mischt sie gut und legt alle Karten verdeckt auf den Tisch."),
+        ("Beginnen", "Ihr spielt zu zweit. Der jüngere Spieler beginnt und zieht die erste Karte."),
+        ("Fragen", "Lies die Aufgabe laut vor. Die kopfüber gedruckte Lösung bleibt zunächst geheim."),
+        ("Zeit läuft", "Dreht die Sanduhr um. Der andere rechnet nur im Kopf und antwortet, bevor die Zeit vorbei ist."),
+        ("Prüfen", "Drehe die Karte um. Ist die Antwort richtig, behält der Antwortende die Karte. Sonst kommt sie beiseite."),
+        ("Rollen tauschen", "Jetzt zieht der andere eine Karte und stellt die nächste Frage. So geht es immer weiter."),
+    ]
+    box_w = 86 * mm
+    box_h = 39 * mm
+    gap_x = 6 * mm
+    gap_y = 5 * mm
+    start_x = 16 * mm
+    top = page_h - 96 * mm
+    for i, (title, text) in enumerate(steps):
+        col = i % 2
+        row = i // 2
+        x = start_x + col * (box_w + gap_x)
+        y = top - (row + 1) * box_h - row * gap_y
+        draw_instruction_step(c, x, y, box_w, box_h, i + 1, title, text)
+
+    win_y = 20 * mm
+    c.setFillColor(NAVY)
+    c.roundRect(16 * mm, win_y, page_w - 32 * mm, 35 * mm, 3 * mm, fill=1, stroke=0)
+    c.setFillColor(white)
+    c.setFont("DV-Bold", 12)
+    c.drawString(22 * mm, win_y + 25 * mm, "Wer gewinnt?")
+    c.setFont("DV", 9)
+    c.drawString(22 * mm, win_y + 17 * mm, "Wenn keine verdeckte Karte mehr auf dem Tisch liegt, zählt ihr eure gewonnenen Karten.")
+    c.setFont("DV-Bold", 9)
+    c.drawString(22 * mm, win_y + 10 * mm, "Wer die meisten Karten hat, gewinnt.")
+    c.setFont("DV", 7.8)
+    c.drawString(
+        22 * mm,
+        win_y + 4.5 * mm,
+        "Fair spielen: keine Hilfsmittel · bei Größen gehört die Einheit zur Antwort.",
+    )
+
+
 def draw_card(c, x, y, width, height, card, number):
     inset = 1.2 * mm
     left = x + inset
@@ -243,13 +336,16 @@ def build():
     c = canvas.Canvas(str(OUTPUT), pagesize=A4, pageCompression=1)
     c.setTitle("Kopfrechen-Duell - 120 Karten")
     c.setAuthor("1 bis 10")
-    c.setSubject("Kartenspiel für zwei Schülerinnen und Schüler, Klasse 5")
+    c.setSubject("Kartenspiel mit Anleitung für zwei Schülerinnen und Schüler, Klasse 5")
 
     margin_x = 8 * mm
     grid_bottom = 8 * mm
     grid_top = page_h - 20 * mm
     card_w = (page_w - 2 * margin_x) / 3
     card_h = (grid_top - grid_bottom) / 4
+
+    draw_instructions(c)
+    c.showPage()
 
     for page_index in range(10):
         c.setFillColor(NAVY)
@@ -285,8 +381,8 @@ def build():
 
     c.save()
     reader = PdfReader(OUTPUT)
-    if len(reader.pages) != 10:
-        raise RuntimeError(f"{len(reader.pages)} statt 10 Seiten")
+    if len(reader.pages) != 11:
+        raise RuntimeError(f"{len(reader.pages)} statt 11 Seiten")
     return OUTPUT
 
 

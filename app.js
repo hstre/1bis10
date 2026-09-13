@@ -77,8 +77,8 @@ function renderHome() {
         <span><strong>Auswerteblatt für Schüler</strong><small>40 Sets × 10 Aufgabentypen · A4 quer</small></span>
         <b>Herunterladen ↓</b>
       </a>
-      <a class="download-card evaluation-card" href="output/pdf/kopfrechen-kartenspiel.pdf?v=2" download>
-        <span><strong>Kopfrechen-Duell als Kartenspiel</strong><small>120 Karten · 10 A4-Blätter · Aufgaben mit Lösung</small></span>
+      <a class="download-card evaluation-card" href="output/pdf/kopfrechen-kartenspiel.pdf?v=3" download>
+        <span><strong>Kopfrechen-Duell als Kartenspiel</strong><small>Spielanleitung · 120 Karten · 10 Ausschneidebögen</small></span>
         <b>Herunterladen ↓</b>
       </a>
       <details class="trick-downloads">
@@ -316,5 +316,5 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowLeft") previousTask();
 });
 
-if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=16"));
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=17"));
 renderHome();
