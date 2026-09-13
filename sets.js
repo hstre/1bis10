@@ -62,7 +62,7 @@ const units = [
 ];
 
 const estimates = [
-  ["Wie schwer ist ungefähr ein Schulranzen?", ["400 g","4 kg","40 kg"], "4 kg"],
+  ["Wie schwer ist ungefähr ein gefüllter Schulranzen?", ["400 g","4 kg","40 kg"], "4 kg"],
   ["Wie hoch ist ungefähr eine Zimmertür?", ["20 cm","2 m","20 m"], "2 m"],
   ["Wie lang dauert ungefähr eine Unterrichtsstunde?", ["5 min","45 min","4 h"], "45 min"],
   ["Welches Ergebnis liegt 49 · 21 am nächsten?", ["100","1000","10 000"], "1000"],
@@ -73,19 +73,19 @@ const estimates = [
   ["Wie schwer ist ungefähr eine Büroklammer?", ["1 g","100 g","1 kg"], "1 g"],
   ["Wie hoch ist ungefähr ein fünfstöckiges Haus?", ["2 m","15 m","150 m"], "15 m"],
   ["Welches Ergebnis liegt 79 · 11 am nächsten?", ["90","900","9000"], "900"],
-  ["Wie viel fasst ungefähr ein Trinkglas?", ["20 ml","200 ml","2 l"], "200 ml"],
+  ["Wie viel fasst ungefähr ein kleines Trinkglas?", ["20 ml","200 ml","2 l"], "200 ml"],
   ["Wie lang ist ungefähr ein Fußballfeld?", ["10 m","100 m","1000 m"], "100 m"],
   ["Wie schwer ist ungefähr ein Fahrrad?", ["1,5 kg","15 kg","150 kg"], "15 kg"],
   ["Welches Ergebnis liegt 603 − 298 am nächsten?", ["30","300","3000"], "300"],
   ["Wie breit ist ungefähr eine Hand?", ["1 cm","10 cm","1 m"], "10 cm"],
   ["Wie lange dauert ungefähr ein Kinofilm?", ["10 min","100 min","1000 min"], "100 min"],
-  ["Wie viel wiegt ungefähr ein Apfel?", ["20 g","200 g","2 kg"], "200 g"],
+  ["Wie viel wiegt ungefähr ein mittelgroßer Apfel?", ["20 g","200 g","2 kg"], "200 g"],
   ["Welches Ergebnis liegt 39 · 51 am nächsten?", ["200","2000","20 000"], "2000"],
   ["Wie hoch ist ungefähr ein Esstisch?", ["7 cm","75 cm","7 m"], "75 cm"],
   ["Wie viel Wasser passt ungefähr in einen Putzeimer?", ["1 l","10 l","100 l"], "10 l"],
   ["Wie schnell geht ein Mensch ungefähr?", ["5 km/h","50 km/h","500 km/h"], "5 km/h"],
   ["Welches Ergebnis liegt 1002 − 497 am nächsten?", ["50","500","5000"], "500"],
-  ["Wie schwer ist ungefähr ein erwachsener Mensch?", ["7 kg","70 kg","700 kg"], "70 kg"],
+  ["Wie schwer ist ungefähr ein Liter Wasser?", ["100 g","1 kg","10 kg"], "1 kg"],
   ["Wie lang ist ungefähr ein Bleistift?", ["2 cm","20 cm","2 m"], "20 cm"],
   ["Wie viel fasst ungefähr eine Getränkedose?", ["33 ml","330 ml","3,3 l"], "330 ml"],
   ["Welches Ergebnis liegt 24 · 39 am nächsten?", ["100","1000","10 000"], "1000"],
@@ -99,7 +99,7 @@ const estimates = [
   ["Welches Ergebnis liegt 197 · 5 am nächsten?", ["100","1000","10 000"], "1000"],
   ["Wie lang ist ungefähr ein Pkw?", ["40 cm","4 m","40 m"], "4 m"],
   ["Wie schwer ist ungefähr ein Laib Brot?", ["10 g","1 kg","100 kg"], "1 kg"],
-  ["Wie viel Wasser verbraucht eine Dusche ungefähr?", ["1 l","50 l","5000 l"], "50 l"],
+  ["Wie viel Wasser verbraucht eine fünfminütige Dusche ungefähr?", ["1 l","50 l","5000 l"], "50 l"],
   ["Welches Ergebnis liegt 498 + 503 am nächsten?", ["100","1000","10 000"], "1000"],
   ["Wie hoch ist ungefähr ein Basketballkorb?", ["30 cm","3 m","30 m"], "3 m"]
 ];
