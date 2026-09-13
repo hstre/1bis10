@@ -73,6 +73,10 @@ function renderHome() {
         <span><strong>Übungsheft als PDF</strong><small>400 Übungsseiten · 4.000 Aufgaben · mit Lösungen</small></span>
         <b>Herunterladen ↓</b>
       </a>
+      <a class="download-card evaluation-card" href="output/pdf/auswerteblatt-1bis10.pdf?v=1" download>
+        <span><strong>Auswerteblatt für Schüler</strong><small>40 Sets × 10 Aufgabentypen · A4 quer</small></span>
+        <b>Herunterladen ↓</b>
+      </a>
       <details class="trick-downloads">
         <summary>
           <span><strong>10 Rechentricks-Heftchen</strong><small>Je 8 Seiten · Erklären · Üben · Lösungen</small></span>
@@ -308,5 +312,5 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowLeft") previousTask();
 });
 
-if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=13"));
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=14"));
 renderHome();

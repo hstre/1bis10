@@ -47,6 +47,7 @@ h1 { margin: 0; font-size: clamp(40px, 6vw, 68px); letter-spacing: -.04em; }
 .download-card strong { font-size: 18px; }
 .download-card small { color: var(--muted); font-size: 14px; }
 .download-card b { white-space: nowrap; font-size: 15px; }
+.download-card.evaluation-card { background: white; }
 .trick-downloads { margin-top: 12px; border: 1px solid #ccd7e0; border-radius: 16px; background: white; overflow: hidden; }
 .trick-downloads summary { padding: 17px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--navy); cursor: pointer; list-style: none; }
 .trick-downloads summary::-webkit-details-marker { display: none; }
