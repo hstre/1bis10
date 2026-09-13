@@ -55,14 +55,14 @@ def build():
     c = canvas.Canvas(str(OUTPUT), pagesize=(width, height), pageCompression=1)
     c.setTitle("1 bis 10 - Auswerteblatt")
     c.setAuthor("1 bis 10")
-    c.setSubject("Auswertung der 40 Kopfrechen-Durchgänge für Klasse 5")
+    c.setSubject("Auswertung der 40 Kopfrechen-Durchgänge für Klasse 6")
 
     # Kopf
     c.setFillColor(NAVY)
     c.rect(0, height - 34 * mm, width, 34 * mm, fill=1, stroke=0)
     c.setFillColor(white)
     c.setFont("DV-Bold", 9)
-    c.drawString(16 * mm, height - 11 * mm, "1 BIS 10 · KOPFRECHNEN · KLASSE 5")
+    c.drawString(16 * mm, height - 11 * mm, "1 BIS 10 · KOPFRECHNEN · KLASSE 6")
     c.setFont("DV-Bold", 23)
     c.drawString(16 * mm, height - 25 * mm, "Mein Auswerteblatt")
 

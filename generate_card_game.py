@@ -336,7 +336,7 @@ def build():
     c = canvas.Canvas(str(OUTPUT), pagesize=A4, pageCompression=1)
     c.setTitle("Kopfrechen-Duell - 120 Karten")
     c.setAuthor("1 bis 10")
-    c.setSubject("Kartenspiel mit Anleitung für zwei Schülerinnen und Schüler, Klasse 5")
+    c.setSubject("Kartenspiel mit Anleitung für zwei Schülerinnen und Schüler, Klasse 6")
 
     margin_x = 8 * mm
     grid_bottom = 8 * mm

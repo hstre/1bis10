@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Erzeugt das feste 1-bis-10-Uebungsheft fuer Klasse 5."""
+"""Erzeugt das feste 1-bis-10-Uebungsheft fuer Klasse 6."""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from reportlab.pdfgen import canvas
 
 
 ROOT = Path(__file__).resolve().parent
-OUTPUT = ROOT / "output" / "pdf" / "1bis10-uebungsheft-klasse5.pdf"
+OUTPUT = ROOT / "output" / "pdf" / "1bis10-uebungsheft-klasse6.pdf"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
@@ -613,9 +613,9 @@ def build_pdf() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     total_pages = 440
     c = canvas.Canvas(str(OUTPUT), pagesize=A4, pageCompression=1)
-    c.setTitle("1 bis 10 - Übungsheft Klasse 5")
+    c.setTitle("1 bis 10 - Übungsheft Klasse 6")
     c.setAuthor("1 bis 10")
-    c.setSubject("4.000 Kopfrechen- und Mathematikaufgaben für Klasse 5")
+    c.setSubject("4.000 Kopfrechen- und Mathematikaufgaben für Klasse 6")
     all_answers: list[list[list[str]]] = []
     page_no = 0
 

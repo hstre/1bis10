@@ -63,21 +63,21 @@ function renderHome() {
   const buttons = sets.map((set, i) => `<button class="set-button ${i === state.setIndex ? "selected" : ""}" data-set="${i}">${String(set.id).padStart(2,"0")}</button>`).join("");
   app.innerHTML = `
     <section class="home-shell">
-      <div class="brand"><span class="brand-number">1–10</span><div><h1>Kopfrechnen</h1><p>Klasse 5 · 40 feste Durchgänge</p></div></div>
+      <div class="brand"><span class="brand-number">1–10</span><div><h1>Kopfrechnen</h1><p>Klasse 6 · 40 feste Durchgänge</p></div></div>
       <div class="set-picker" aria-label="Set auswählen">${buttons}</div>
       <div class="home-actions">
         <button class="primary" data-action="start">${esc(currentSet().title)} starten</button>
         <button class="secondary" data-action="review">Kontrollansicht</button>
       </div>
-      <a class="download-card" href="output/pdf/1bis10-uebungsheft-klasse5.pdf?v=2" download>
+      <a class="download-card" href="output/pdf/1bis10-uebungsheft-klasse6.pdf?v=3" download>
         <span><strong>Übungsheft als PDF</strong><small>400 Übungsseiten · 4.000 Aufgaben · mit Lösungen</small></span>
         <b>Herunterladen ↓</b>
       </a>
-      <a class="download-card evaluation-card" href="output/pdf/auswerteblatt-1bis10.pdf?v=1" download>
+      <a class="download-card evaluation-card" href="output/pdf/auswerteblatt-1bis10.pdf?v=2" download>
         <span><strong>Auswerteblatt für Schüler</strong><small>40 Sets × 10 Aufgabentypen · A4 quer</small></span>
         <b>Herunterladen ↓</b>
       </a>
-      <a class="download-card evaluation-card" href="output/pdf/kopfrechen-kartenspiel.pdf?v=3" download>
+      <a class="download-card evaluation-card" href="output/pdf/kopfrechen-kartenspiel.pdf?v=4" download>
         <span><strong>Kopfrechen-Duell als Kartenspiel</strong><small>Spielanleitung · 120 Karten · 10 Ausschneidebögen</small></span>
         <b>Herunterladen ↓</b>
       </a>
@@ -87,16 +87,16 @@ function renderHome() {
           <b>Auswählen ↓</b>
         </summary>
         <div class="trick-grid">
-          <a href="output/pdf/rechentricks/01-addition-subtraktion.pdf?v=4" download><span>01</span>Addition und Subtraktion</a>
-          <a href="output/pdf/rechentricks/02-multiplikation.pdf?v=4" download><span>02</span>Multiplikation</a>
-          <a href="output/pdf/rechentricks/03-division.pdf?v=4" download><span>03</span>Division</a>
-          <a href="output/pdf/rechentricks/04-einheiten.pdf?v=4" download><span>04</span>Einheiten</a>
-          <a href="output/pdf/rechentricks/05-schaetzen.pdf?v=4" download><span>05</span>Schätzen</a>
-          <a href="output/pdf/rechentricks/06-verhaeltnisse.pdf?v=4" download><span>06</span>Verhältnisse</a>
-          <a href="output/pdf/rechentricks/07-diagramme.pdf?v=4" download><span>07</span>Diagramme</a>
-          <a href="output/pdf/rechentricks/08-zwei-dreisatz.pdf?v=4" download><span>08</span>Zwei- und Dreisatz</a>
-          <a href="output/pdf/rechentricks/09-ebene-figuren.pdf?v=4" download><span>09</span>Ebene Figuren</a>
-          <a href="output/pdf/rechentricks/10-koerper-raum.pdf?v=4" download><span>10</span>Körper und Raum</a>
+          <a href="output/pdf/rechentricks/01-addition-subtraktion.pdf?v=5" download><span>01</span>Addition und Subtraktion</a>
+          <a href="output/pdf/rechentricks/02-multiplikation.pdf?v=5" download><span>02</span>Multiplikation</a>
+          <a href="output/pdf/rechentricks/03-division.pdf?v=5" download><span>03</span>Division</a>
+          <a href="output/pdf/rechentricks/04-einheiten.pdf?v=5" download><span>04</span>Einheiten</a>
+          <a href="output/pdf/rechentricks/05-schaetzen.pdf?v=5" download><span>05</span>Schätzen</a>
+          <a href="output/pdf/rechentricks/06-verhaeltnisse.pdf?v=5" download><span>06</span>Verhältnisse</a>
+          <a href="output/pdf/rechentricks/07-diagramme.pdf?v=5" download><span>07</span>Diagramme</a>
+          <a href="output/pdf/rechentricks/08-zwei-dreisatz.pdf?v=5" download><span>08</span>Zwei- und Dreisatz</a>
+          <a href="output/pdf/rechentricks/09-ebene-figuren.pdf?v=5" download><span>09</span>Ebene Figuren</a>
+          <a href="output/pdf/rechentricks/10-koerper-raum.pdf?v=5" download><span>10</span>Körper und Raum</a>
         </div>
       </details>
       <label class="toggle"><input type="checkbox" id="autoAdvance" ${state.autoAdvance ? "checked" : ""}><span>Nach Ablauf der Zeit automatisch weiter</span></label>
@@ -316,5 +316,5 @@ document.addEventListener("keydown", event => {
   if (event.key === "ArrowLeft") previousTask();
 });
 
-if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=17"));
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=18"));
 renderHome();

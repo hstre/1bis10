@@ -362,7 +362,7 @@ def page_footer(c, page, total=8):
     c.line(12 * mm, 12 * mm, w - 12 * mm, 12 * mm)
     c.setFont("DV", 7)
     c.setFillColor(MUTED)
-    c.drawString(12 * mm, 7.5 * mm, "1 bis 10 · Rechentricks · Klasse 5")
+    c.drawString(12 * mm, 7.5 * mm, "1 bis 10 · Rechentricks · Klasse 6")
     c.drawRightString(w - 12 * mm, 7.5 * mm, f"Seite {page} von {total}")
 
 
@@ -525,7 +525,7 @@ def build_booklet(number, book):
     c = canvas.Canvas(str(path), pagesize=A5, pageCompression=1)
     c.setTitle(f"Rechentricks {number}: {book['title']}")
     c.setAuthor("1 bis 10")
-    c.setSubject(f"Rechentricks für Klasse 5: {book['title']}")
+    c.setSubject(f"Rechentricks für Klasse 6: {book['title']}")
     cover(c, number, book)
     c.showPage()
     for index, strategy in enumerate(book["strategies"], 1):

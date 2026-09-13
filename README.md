@@ -1,6 +1,6 @@
 # 1 bis 10
 
-Eine browserbasierte Kopfrechen-Reihe für Klasse 5 mit 40 festen, kontrollierbaren Durchgängen.
+Eine browserbasierte Kopfrechen-Reihe für Klasse 6 mit 40 festen, kontrollierbaren Durchgängen.
 
 Jeder Durchgang enthält dieselben zehn Aufgabenklassen in wechselnden Darstellungen. Die Zeit jeder Aufgabe wird durch einen wachsenden Balken angezeigt. Am Ende folgt die gemeinsame Selbstkontrolle.
 
